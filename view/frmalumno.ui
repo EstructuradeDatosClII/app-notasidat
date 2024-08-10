@@ -184,7 +184,7 @@
       <string>GUARDAR</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="btneliminar">
+    <widget class="QPushButton" name="btnnuevo">
      <property name="geometry">
       <rect>
        <x>390</x>
@@ -194,7 +194,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>ELIMINAR</string>
+      <string>NUEVO</string>
      </property>
     </widget>
    </widget>

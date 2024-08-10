@@ -12,6 +12,9 @@ class CursoController:
         self.ventana.tblcursos.setColumnWidth(0, 75)
         self.ventana.tblcursos.setColumnWidth(1, 280)
         self.ventana.tblcursos.setColumnWidth(2, 75)
+        self.ventana.btnnuevo.clicked.connect(self.onClick_BtnNuevo)
+        self.ventana.btnguardar.clicked.connect(self.onClick_BtnGuardar)
+        self.ventana.tblcursos.cellClicked.connect(self.onCellClick_TblCursos)
         self.cursoDao = CursoDao()
         self.listarCursos()
         self.ventana.show()        
@@ -22,7 +25,10 @@ class CursoController:
         nomcurso = self.ventana.txtnombre.text()
         credcurso = self.ventana.txtcredito.text()
         nuevoCurso = Curso(idcurso, nomcurso, credcurso)
-        self.cursoDao.insertarCurso(nuevoCurso)
+        if self.ventana.txtcodigo.isEnabled():
+            self.cursoDao.insertarCurso(nuevoCurso)
+        else:
+            self.cursoDao.actualizarCurso(nuevoCurso)
         self.listarCursos()
     
     def onClick_BtnNuevo(self):
@@ -37,7 +43,7 @@ class CursoController:
         self.ventana.txtcodigo.setEnabled(False)
         objCurso = self.cursoDao.obtenerCurso(idcurso)
         self.ventana.txtnombre.setText(objCurso[1])
-        self.ventana.txtcredito.setText(objCurso[2])
+        self.ventana.txtcredito.setText(str(objCurso[2]))
     
     
     def listarCursos(self):
